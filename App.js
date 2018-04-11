@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Text, View, Alert, TouchableOpacity } from 'react-native';
+import { Text, View, Alert, TouchableOpacity, Button } from 'react-native';
 
 export default class App extends Component {
 
@@ -21,49 +21,37 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState(
-                    {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        error: null,
-                    }
+        this.watchId = navigator.geolocation.watchPosition(
+                (position) => {
+            this.setState({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                error: null,
+            });
+        },
+                (error) => this.setState({error: error.message}),
+                {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
-            },
-            (error) => this.setState(
-                    {
-                        error: error.message
-                    }),
-                    {
-                        enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
-                    },
-        );
     }
-    
-    
-    
+
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(this.watchId);
+    }
+
     onPress = () => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState(
-                    {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        error: null,
-                    }
+        this.watchId = navigator.geolocation.watchPosition(
+                (position) => {
+            this.setState({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                error: null,
+            });
+        },
+                (error) => this.setState({error: error.message}),
+                {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
-            },
-            (error) => this.setState(
-                    {
-                        error: error.message
-                    }),
-                    {
-                        enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
-                    },
-        );
-        if ((this.state.latitude > this.state.latitudeif - 10) && (this.state.latitude < this.state.latitudeif + 10)) {
-            if ((this.state.longitude > this.state.longitudeif - 10) && (this.state.longitude < this.state.longitudeif + 10)) {
+        if ((this.state.latitude > this.state.latitudeif - 0.03) && (this.state.latitude < this.state.latitudeif + 0.03)) {
+            if ((this.state.longitude > this.state.longitudeif - 0.03) && (this.state.longitude < this.state.longitudeif + 0.03)) {
                 Alert.alert('Você está no IFRN de Currais Novos');
             } else {
                 Alert.alert('Você não está no IFRN de Currais Novos');
@@ -80,22 +68,21 @@ export default class App extends Component {
                     Welcome to React Native!
                     </Text>
                     <Text>
-                        Latitude: {this.state.latitude}
+                    Latitude: {this.state.latitude}
                     </Text>
                     <Text>
-                        Longitude: {this.state.longitude}
+                    Longitude: {this.state.longitude}
                     </Text>
                     {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
-                    <TouchableOpacity
+                    <Button
                         onPress={this.onPress}
-                    >
-                    <Text> Touch Here </Text>
-                    </TouchableOpacity>
+                        title="Verificar se estou no IF"
+                        color="#841584"
+                        accessibilityLabel="Learn more about this purple button"
+                        />
                 </View>
                 );
 
     }
 
 }
-
-
