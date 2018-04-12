@@ -1,23 +1,37 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+import React, { Component } from 'react';
+import { Text, View, Alert, TouchableOpacity, Button } from 'react-native';
+import MapView from 'react-native-maps';
+
+export default class App extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillUnmount() {
+    }
+
+    onPress = () => {
+
+    }
+
+    render() {
+        return (
+                <View style={{height: 200, width: 200}}>
+                    <MapView style={{height: 200, width: 200}} />
+                </View>
+              );
+
+    }
+
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
