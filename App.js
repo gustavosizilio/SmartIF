@@ -19,8 +19,8 @@ import MyLocationMapMarker from './MyLocationMapMarker';
 const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
-const LATITUDE = -6.253380;
-const LONGITUDE = -36.53454;
+const LATITUDE = -6.261601;
+const LONGITUDE = -36.512239;
 const LATITUDE_DELTA = 0.0050;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -77,8 +77,8 @@ class App extends Component {
                 (error) => this.setState({error: error.message}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
-        if ((this.state.latitudeAl > this.state.latitude - 0.03) && (this.state.latitudeAl < this.state.latitude + 0.03)) {
-            if ((this.state.longitudeAl > this.state.longitude - 0.03) && (this.state.longitudeAl < this.state.longitude + 0.03)) {
+        if ((this.state.latitudeAl > this.state.region.latitude - 0.03) && (this.state.latitudeAl < this.state.region.latitude + 0.03)) {
+            if ((this.state.longitudeAl > this.state.region.longitude - 0.03) && (this.state.longitudeAl < this.state.region.longitude + 0.03)) {
                 Alert.alert('Você está no IFRN de Currais Novos');
             } else {
                 Alert.alert('Você não está no IFRN de Currais Novos');
