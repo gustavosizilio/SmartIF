@@ -107,10 +107,16 @@ class App extends Component {
         return (
                 <View style={styles.container}>
                     <Text>
-                    Latitude - Aluno: {this.state.latitudeAl}
+                    Latitude(PB):{this.state.region.latitude}
                     </Text>
                     <Text>
-                    Longitude - Aluno: {this.state.longitudeAl}
+                    Longitude(PB):{this.state.region.longitude}
+                    </Text>
+                    <Text>
+                    Latitude(Aluno):{this.state.latitudeAl}
+                    </Text>
+                    <Text>
+                    Longitude(Aluno):{this.state.longitudeAl}
                     </Text>
                     {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
                     <Button
@@ -149,7 +155,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: '80%'
+    height: '70%'
   },
   bubble: {
     backgroundColor: 'rgba(255,255,255,0.7)',
