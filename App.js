@@ -42,10 +42,8 @@ class App extends Component {
               latitude: LATITUDE,
               longitude: LONGITUDE,
             },
-            coordinateAl: {
-              latitudeAlc: LATITUDE,
-              longitudeAlc: LONGITUDE,
-            },
+            latitudeAlc: LATITUDE,
+            longitudeAlc: LONGITUDE,
             amount: 0,
             enableHack: false,
           };
@@ -57,11 +55,12 @@ class App extends Component {
             this.setState({
                 latitudeAl: position.coords.latitude,
                 longitudeAl: position.coords.longitude,
-                coordinateAl: { latitudeAlc: position.coords.latitude, longitudeAlc: position.coords.longitude},
+                latitudeAlc: position.coords.latitude, 
+                longitudeAlc: position.coords.longitude,
                 error: null,
             });
         },
-                (error) => this.setState({error: error.message, coordinateAl: { latitudeAlc: LATITUDE, longitudeAlc: LONGITUDE }}),
+                (error) => this.setState({error: error.message, latitudeAlc: LATITUDE, longitudeAlc: LONGITUDE}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
     }
@@ -77,7 +76,8 @@ class App extends Component {
             {
                 latitudeAl: position.coords.latitude,
                 longitudeAl: position.coords.longitude,
-                coordinateAl: { latitudeAlc: position.coords.latitude, longitudeAlc: position.coords.longitude},
+                latitudeAlc: position.coords.latitude, 
+                longitudeAlc: position.coords.longitude,
                 error: null,
             });
         },
@@ -149,7 +149,7 @@ class App extends Component {
                         enableHack={this.state.enableHack}
                       />
                       <MapView.Marker 
-                        coordinate={this.state.coordinate}
+                        coordinate={{latitude: this.state.latitudeAlc, longitude: this.state.longitudeAlc}}
                         title={'Aluno'}
                       />
                     </MapView>
