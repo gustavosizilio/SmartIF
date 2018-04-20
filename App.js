@@ -77,14 +77,20 @@ class App extends Component {
                 (error) => this.setState({error: error.message}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
-        if ((this.state.latitudeAl > this.state.region.latitude - 0.03) && (this.state.latitudeAl < this.state.region.latitude + 0.03)) {
-            if ((this.state.longitudeAl > this.state.region.longitude - 0.03) && (this.state.longitudeAl < this.state.region.longitude + 0.03)) {
+        var la = this.state.latitudeAl;
+        var l = this.state.region.latitude;
+        var loa = this.state.longitudeAl;
+        var lo = this.state.region.longitude;
+        if ((la > l - 0.004) && (la < l + 0.004)) {
+            if ((loa > lo - 0.004) && (loa < lo + 0.004)) {
                 Alert.alert('Você está no IFRN de Currais Novos');
             } else {
                 Alert.alert('Você não está no IFRN de Currais Novos');
+                Alert.alert(loa + '<' + lo + ' - 0.004' + 'ou' + loa + '>' + lo + ' + 0.004');
             }
         } else {
             Alert.alert('Você não está no IFRN de Currais Novos');
+            Alert.alert(la + '<' + l + ' - 0.004' + 'ou' + la + '>' + l + ' + 0.004');
         }
     }
     
