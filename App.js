@@ -42,6 +42,10 @@ class App extends Component {
               latitude: LATITUDE,
               longitude: LONGITUDE,
             },
+            coordinateAl: {
+              latitudeAlc: LATITUDE,
+              longitudeAlc: LONGITUDE,
+            },
             amount: 0,
             enableHack: false,
           };
@@ -53,10 +57,11 @@ class App extends Component {
             this.setState({
                 latitudeAl: position.coords.latitude,
                 longitudeAl: position.coords.longitude,
+                coordinateAl: { latitudeAlc: position.coords.latitude, longitudeAlc: position.coords.longitude},
                 error: null,
             });
         },
-                (error) => this.setState({error: error.message}),
+                (error) => this.setState({error: error.message, coordinateAl: { latitudeAlc: LATITUDE, longitudeAlc: LONGITUDE }}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
     }
@@ -68,13 +73,15 @@ class App extends Component {
     onPress = () => {
         this.watchId = navigator.geolocation.watchPosition(
                 (position) => {
-            this.setState({
+            this.setState(
+            {
                 latitudeAl: position.coords.latitude,
                 longitudeAl: position.coords.longitude,
+                coordinateAl: { latitudeAlc: position.coords.latitude, longitudeAlc: position.coords.longitude},
                 error: null,
             });
         },
-                (error) => this.setState({error: error.message}),
+                (error) => this.setState({error: error.message, coordinateAl: { latitudeAlc: LATITUDE, longitudeAlc: LONGITUDE }}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
         var la = this.state.latitudeAl;
@@ -86,11 +93,11 @@ class App extends Component {
                 Alert.alert('Você está no IFRN de Currais Novos');
             } else {
                 Alert.alert('Você não está no IFRN de Currais Novos');
-                Alert.alert(loa + '<' + lo + ' - 0.004' + 'ou' + loa + '>' + lo + ' + 0.004');
+                Alert.alert(loa + '<' + lo + ' - 0.004' + ' ou ' + loa + '>' + lo + ' + 0.004');
             }
         } else {
             Alert.alert('Você não está no IFRN de Currais Novos');
-            Alert.alert(la + '<' + l + ' - 0.004' + 'ou' + la + '>' + l + ' + 0.004');
+            Alert.alert(la + '<' + l + ' - 0.004' + ' ou ' + la + '>' + l + ' + 0.004');
         }
     }
     
@@ -134,14 +141,16 @@ class App extends Component {
                     <MapView
                       provider={this.props.provider}
                       style={styles.map}
-                      mapType={MAP_TYPES.HYBRID}
                       initialRegion={this.state.region}
-
                     >
                       <MyLocationMapMarker
                         coordinate={this.state.coordinate}
                         heading={this.state.amount}
                         enableHack={this.state.enableHack}
+                      />
+                      <MapView.Marker 
+                        coordinate={this.state.coordinate}
+                        title={'Aluno'}
                       />
                     </MapView>
 
