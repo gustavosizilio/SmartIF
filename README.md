@@ -40,6 +40,8 @@ Ou então:
           android:value="API_ANDROID_KEY"/>
     </application>
     
+    Lembrar que 'API_ANDROID_KEY' é uma chave que vai ser gerada em: https://developers.google.com/maps/documentation/android-api/?hl=pt-br
+    
     * Adicionar o 'import com.airbnb.android.react.maps.MapsPackage;' and 'new MapsPackage()' no arquivo 'MainApplication.java' em 'android\app\src\main\java\com\smartif\MainApplication.java' da seguinte forma:
     
     import com.airbnb.android.react.maps.MapsPackage;
