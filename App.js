@@ -11,22 +11,32 @@ import { StyleSheet,
   Dimensions,
   TouchableOpacity, 
   Button,
-  Alert
+  Alert,
+  StackNavigator
   } from 'react-native';
+
+const App = StackNavigator({
+  Home: { screen: ./Mapa/App.js },
+});
 
 export default class App extends Component {
         
     constructor(props) {
         super(props);
     }
+	
+    static navigationOptions = {
+    	title: 'Welcome',
+    };
        
     render() {
+        const { navigate } = this.props.navigation;
         return (
-                <View>
-                    <Text>
-                    </Text>
-                </View>
-	);
+        	<Button
+        		title="Go to Jane's profile"
+        		onPress={() =>navigate('Home')}
+      		/>
+    	);
     }
    
 }
