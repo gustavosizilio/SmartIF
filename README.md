@@ -68,11 +68,9 @@ Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' r
          
      * No WINDOWS, configurar a variável ANDROID_HOME, com o caminho do Sdk, e Path, com os locais de build-tools e plataform-tools:
      
-         c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk
-         
-         c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\build-tools
-         
-         c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\platform-tools
+         1. c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk         
+         2. c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\build-tools
+         3. c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\platform-tools
 
 # Configuração da Navegação
 
