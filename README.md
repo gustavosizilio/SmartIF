@@ -57,5 +57,5 @@ Ou então:
 
 Para testar se está tudo ok, basta excecutar o projeto:
 > cd PastaProjeto
-> * PastaProjeto> react-native run-android
+> PastaProjeto> react-native run-android
 
