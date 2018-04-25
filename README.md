@@ -12,7 +12,7 @@ Se não, com este Projeto baixado:
 
 > instalar o react-native-maps com o comando 'npm install react-native-maps --save' ou 'npm install'.
 
-Ou então:
+Ou então com um novo Projeto:
 
 > criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html (react-native init NameProject);
 
