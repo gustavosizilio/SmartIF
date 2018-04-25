@@ -58,7 +58,7 @@ Ou então:
 Navegação
 > A solução da comunidade para navegação é uma biblioteca autônoma que permite aos desenvolvedores configurar as telas de um aplicativo com apenas algumas linhas de código.
 
-O primeiro passo é instalar no seu projeto:
+O primeiro passo é instalar no projeto:
 > npm install --save react-navigation
 
 Para testar se está tudo ok, basta excecutar o projeto:
