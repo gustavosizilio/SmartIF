@@ -6,7 +6,7 @@ Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' r
 
 Se não:
 
-> basta criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html;
+> basta criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html (react-native init NameProject);
 
 > importar a pasta node_modules para o presente projeto;
 
@@ -14,7 +14,7 @@ Se não:
 
 Ou então:
 
-> criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html;
+> criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html (react-native init NameProject);
 
 > instalar o react-native-maps com o comando: npm install react-native-maps --save;
 
@@ -56,6 +56,14 @@ Ou então:
      
      * configurar permissões no arquivo Manifest.xml acima mencionado para usar gps:
      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+     
+     * No LINUX, configurar as variáveis de ambiente em '$HOME/.bash_profile':
+         export ANDROID_HOME=$HOME/Android/Sdk
+         export PATH=$PATH:$ANDROID_HOME/tools
+         export PATH=$PATH:$ANDROID_HOME/platform-tools
+         
+     * No WINDOWS, configurar a variável ANDROID_HOME, com o caminho do Sdk:
+         c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk
 
 Navegação
 > A solução da comunidade para navegação é uma biblioteca autônoma que permite aos desenvolvedores configurar as telas de um aplicativo com apenas algumas linhas de código.
