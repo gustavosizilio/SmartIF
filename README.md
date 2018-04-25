@@ -55,6 +55,12 @@ Ou então:
      * configurar permissões no arquivo Manifest.xml acima mencionado para usar gps:
      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+Navegação
+> A solução da comunidade para navegação é uma biblioteca autônoma que permite aos desenvolvedores configurar as telas de um aplicativo com apenas algumas linhas de código.
+
+O primeiro passo é instalar no seu projeto:
+> npm install --save react-navigation
+
 Para testar se está tudo ok, basta excecutar o projeto:
 > cd PastaProjeto
 > PastaProjeto> react-native run-android
