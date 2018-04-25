@@ -1,4 +1,4 @@
-# Configuração
+# Configuração de Mapas
 
 Baixar o conteúdo deste projeto.
 
@@ -65,8 +65,9 @@ Ou então:
      * No WINDOWS, configurar a variável ANDROID_HOME, com o caminho do Sdk:
          c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk
 
-Navegação
-> A solução da comunidade para navegação é uma biblioteca autônoma que permite aos desenvolvedores configurar as telas de um aplicativo com apenas algumas linhas de código.
+# Configuração da Navegação
+
+A solução da comunidade para navegação é uma biblioteca autônoma que permite aos desenvolvedores configurar as telas de um aplicativo com apenas algumas linhas de código.
 
 O primeiro passo é instalar no projeto:
 > npm install --save react-navigation
