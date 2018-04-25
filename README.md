@@ -21,6 +21,7 @@ Ou então com um novo Projeto:
 > configurar as dependências:
 
     * No arquivo 'build.grandle' em 'android/app/build.gradle', configurar as dependências:
+    
     dependencies {
       implementation fileTree(dir: "libs", include: ["*.jar"])
       implementation "com.android.support:appcompat-v7:+"
@@ -29,10 +30,12 @@ Ou então com um novo Projeto:
     }
 
     * No arquivo 'settings.gradle' em 'android/settings.gradle', adicionar a inclusão:
+    
     include ':react-native-maps'
     project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
 
     * No arquivo 'AndroidManifest.xml' em 'android/app/src/main/AndroidManifest.xml', adicionar a tag <meta-data> dentro da tag <application>:
+    
     <application>
     <!-- You will only need to add this meta-data tag, but make sure it's a child of application -->
       <meta-data
@@ -58,11 +61,13 @@ Ou então com um novo Projeto:
      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
      
      * No LINUX, configurar as variáveis de ambiente em '$HOME/.bash_profile':
+     
          export ANDROID_HOME=$HOME/Android/Sdk
          export PATH=$PATH:$ANDROID_HOME/tools
          export PATH=$PATH:$ANDROID_HOME/platform-tools
          
      * No WINDOWS, configurar a variável ANDROID_HOME, com o caminho do Sdk:
+     
          c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk
 
 # Configuração da Navegação
