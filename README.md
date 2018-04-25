@@ -2,15 +2,15 @@
 
 Baixar o conteúdo deste projeto.
 
-Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' resolver.
+Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' resolve.
 
-Se não:
+Se não, com este Projeto baixado:
 
 > basta criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html (react-native init NameProject);
 
-> importar a pasta node_modules para o presente projeto;
+> mover ou copiar a pasta 'node_modules' do projeto recém criado para pasta do presente projeto;
 
-> instalar o react-native-maps com o comando: npm install react-native-maps --save.
+> instalar o react-native-maps com o comando 'npm install react-native-maps --save' ou 'npm install'.
 
 Ou então:
 
