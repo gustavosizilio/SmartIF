@@ -4,7 +4,7 @@ Baixar o conteúdo deste projeto.
 
 Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' resolve.
 
-Se não, com este Projeto baixado:
+## Se não, com este Projeto baixado:
 
 > basta criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html (react-native init NameProject);
 
@@ -12,7 +12,7 @@ Se não, com este Projeto baixado:
 
 > instalar o react-native-maps com o comando 'npm install react-native-maps --save' ou 'npm install'.
 
-Ou então com um novo Projeto:
+## Ou então com um novo Projeto:
 
 > criar um projeto com o link https://facebook.github.io/react-native/docs/getting-started.html (react-native init NameProject);
 
@@ -66,9 +66,13 @@ Ou então com um novo Projeto:
          export PATH=$PATH:$ANDROID_HOME/tools
          export PATH=$PATH:$ANDROID_HOME/platform-tools
          
-     * No WINDOWS, configurar a variável ANDROID_HOME, com o caminho do Sdk:
+     * No WINDOWS, configurar a variável ANDROID_HOME, com o caminho do Sdk, e Path, com os locais de build-tools e plataform-tools:
      
          c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk
+         
+         c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\build-tools
+         
+         c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\platform-tools
 
 # Configuração da Navegação
 
