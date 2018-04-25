@@ -51,6 +51,11 @@ Ou então:
                  new MapsPackage()
          );
      }
+     
+     * configurar permissões no arquivo Manifest.xml acima mencionado para usar gps:
+     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
+> para testar se está tudo ok, basta excecutar o projeto:
+   * > cd PastaProjeto
+   * PastaProjeto> react-native run-android
 
