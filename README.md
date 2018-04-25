@@ -1,3 +1,6 @@
+# Pré requisitos
+> Ler: https://facebook.github.io/react-native/docs/getting-started.html.
+
 # Configuração de Mapas
 
 Baixar o conteúdo deste projeto.
