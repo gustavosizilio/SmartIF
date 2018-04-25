@@ -62,9 +62,9 @@ Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' r
      
      * No LINUX, configurar as variáveis de ambiente em '$HOME/.bash_profile':
      
-         export ANDROID_HOME=$HOME/Android/Sdk
-         export PATH=$PATH:$ANDROID_HOME/tools
-         export PATH=$PATH:$ANDROID_HOME/platform-tools
+         1. export ANDROID_HOME=$HOME/Android/Sdk
+         2. export PATH=$PATH:$ANDROID_HOME/tools
+         3. export PATH=$PATH:$ANDROID_HOME/platform-tools
          
      * No WINDOWS, configurar a variável ANDROID_HOME, com o caminho do Sdk, e Path, com os locais de build-tools e plataform-tools:
      
