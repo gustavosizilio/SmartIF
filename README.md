@@ -63,5 +63,6 @@ O primeiro passo é instalar no projeto:
 
 Para testar se está tudo ok, basta excecutar o projeto:
 > cd PastaProjeto
+
 > PastaProjeto> react-native run-android
 
