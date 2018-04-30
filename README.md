@@ -84,6 +84,9 @@ A solução da comunidade para navegação é uma biblioteca autônoma que permi
 O primeiro passo é instalar no projeto:
 > npm install --save react-navigation
 
+No Windows talvez seja preciso instalar uma versão expecifica em razão de problemas ssh:
+> npm install --save react-navigation@1.0.0-beta.27
+
 Para testar se está tudo ok, basta excecutar o projeto:
 > cd PastaProjeto
 
