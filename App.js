@@ -8,35 +8,41 @@ import React, { Component } from 'react';
 import { StyleSheet,
   View,
   Text,
+  StackNavigator,
   Dimensions,
   TouchableOpacity, 
   Button,
-  Alert,
-  StackNavigator
+  Alert
   } from 'react-native';
+  import Mapa from "./mapa/AppMapa.js";
 
-const App = StackNavigator({
-  Home: { screen: ./Mapa/App.js },
+const Navegacao = StackNavigator({
+  Mapa: { screen: Mapa },
 });
 
-export default class App extends Component {
+class App extends Component {
         
     constructor(props) {
         super(props);
     }
-	
+    
     static navigationOptions = {
-    	title: 'Welcome',
+        title: 'Welcome',
     };
-       
+    
     render() {
-        const { navigate } = this.props.navigation;
-        return (
-        	<Button
-        		title="Go to Jane's profile"
-        		onPress={() =>navigate('Home')}
-      		/>
-    	);
+        return <Navegacao/>;
     }
    
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  });
+
+export default App;
