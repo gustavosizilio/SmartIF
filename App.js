@@ -5,20 +5,25 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet,
-  View,
-  Text,
-  StackNavigator,
-  Dimensions,
-  TouchableOpacity, 
-  Button,
-  Alert
-  } from 'react-native';
-  import Mapa from "./mapa/AppMapa.js";
+import { Button } from 'react-native';
+import { TabNavigator  } from 'react-navigation';
+import Mapa from './mapa/AppMapa';
+import Home from './Home';
 
-const Navegacao = StackNavigator({
-  Mapa: { screen: Mapa },
-});
+const RootStack = TabNavigator (
+  {
+    Mapa: {
+      screen: Mapa,
+    },
+    Home: {
+      screen: Home,
+    },
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
 
 class App extends Component {
         
@@ -26,23 +31,10 @@ class App extends Component {
         super(props);
     }
     
-    static navigationOptions = {
-        title: 'Welcome',
-    };
-    
     render() {
-        return <Navegacao/>;
+        return <RootStack />;
     }
    
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  });
 
 export default App;
