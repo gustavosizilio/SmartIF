@@ -13,6 +13,7 @@ import { StyleSheet,
   Button,
   Alert
   } from 'react-native';
+import { TabNavigator  } from 'react-navigation';
 import MapView, { MAP_TYPES, Polygon, ProviderPropType } from 'react-native-maps';
 //import MyLocationMapMarker from './mapa/MyLocationMapMarker';
 
