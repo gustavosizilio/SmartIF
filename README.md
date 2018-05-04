@@ -77,6 +77,11 @@ Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' r
 
 > Talvez ainda seja necessário rodar esse comando 'npm install babel-preset-expo --save'.
 
+Talvez ainda precise rodar outro comando:
+> npm install babel-preset-expo --save
+
+Para quem estiver usando o GENYMOTION ainda precisa fazer outras configurações: https://inthecheesefactory.com/blog/how-to-install-google-services-on-genymotion/en
+
 # Configuração da Navegação
 
 A solução da comunidade para navegação é uma biblioteca autônoma que permite aos desenvolvedores configurar as telas de um aplicativo com apenas algumas linhas de código.
