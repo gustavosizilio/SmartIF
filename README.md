@@ -97,3 +97,5 @@ Para testar se está tudo ok, basta excecutar o projeto:
 
 > PastaProjeto> react-native run-android
 
+
+
