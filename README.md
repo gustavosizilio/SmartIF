@@ -75,8 +75,6 @@ Instalar o pacote de modulos: 'node_modules', acho que o comando 'npm install' r
          2. c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\build-tools
          3. c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\platform-tools
 
-> Talvez ainda seja necessário rodar esse comando 'npm install babel-preset-expo --save'.
-
 Talvez ainda precise rodar outro comando:
 > npm install babel-preset-expo --save
 
