@@ -30,6 +30,7 @@ class AppMapa extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            infoPosicaoAl: null,
             latitudeAl: null,
             longitudeAl: null,
             erro: null,
@@ -64,39 +65,21 @@ class AppMapa extends Component {
                 (error) => this.setState({error: error.message, latitudeAlc: LATITUDE, longitudeAlc: LONGITUDE}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
                 );
+        var la = this.state.latitudeAl;
+        var l = this.state.region.latitude;
+        var loa = this.state.longitudeAl;
+        var lo = this.state.region.longitude;
+        if (((la > l - 0.004) && (la < l + 0.004)) && ((loa > lo - 0.004) && (loa < lo + 0.004))) {
+            this.setState({infoPosicaoAl: 'Você está no IFRN de Currais Novos'});
+        } else {
+            this.setState({infoPosicaoAl: 'Você não está no IFRN de Currais Novos'});
+        }
     }
 
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchId);
     }
     
-    onPress = () => {
-        var la = this.state.latitudeAl;
-        var l = this.state.region.latitude;
-        var loa = this.state.longitudeAl;
-        var lo = this.state.region.longitude;
-        if ((la > l - 0.004) && (la < l + 0.004)) {
-            if ((loa > lo - 0.004) && (loa < lo + 0.004)) {
-                Alert.alert('Você está no IFRN de Currais Novos');
-            } else {
-                Alert.alert('Você não está no IFRN de Currais Novos');
-            }
-        } else {
-            Alert.alert('Você não está no IFRN de Currais Novos');
-        }
-    }
-    
-    getInitialState() {
-        return {
-          region: {
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          },
-        };
-      }
-
     onRegionChange(region) {
       this.setState({ region });
     }
@@ -116,25 +99,24 @@ class AppMapa extends Component {
                     <Text>
                     Longitude(Aluno):{this.state.longitudeAl}
                     </Text>
+                    <Text>
+                    {this.state.infoPosicaoAl}
+                    </Text>
                     {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
-                    <Button
-                        onPress={this.onPress}
-                        title="Verificar se estou no IF"
-                        color="#841584"
-                        accessibilityLabel="Learn more about this purple button"
-                        />
                     <MapView
                       provider={this.props.provider}
                       style={styles.map}
                       initialRegion={this.state.region}
                     >
                       <MapView.Marker 
-                        coordinate={this.state.coordinate}
+                        coordinate={{latitude: this.state.latitudeAlc, longitude: this.state.longitudeAlc}}
                         title={'Aluno'}
                       />
                       <MapView.Marker 
-                        coordinate={{latitude: this.state.latitudeAlc, longitude: this.state.longitudeAlc}}
-                        title={'Aluno'}
+                        coordinate={this.state.coordinate}
+                        title={'IFRN'}
+                        description={'IFRN'}
+                        image={require('./ifrnicon.png')}
                       />
                     </MapView>
 
