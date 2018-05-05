@@ -5,24 +5,49 @@
  */
 
 import React, { Component } from 'react';
-import { Button } from 'react-native';
-import { TabNavigator  } from 'react-navigation';
+import { Button, Text } from 'react-native';
+import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 import Mapa from './mapa/AppMapa';
-import Home from './Home';
+import Home from './login/AppHome';
+import Login from './login/AppLogin';
 
-const RootStack = TabNavigator (
+const Tab = TabNavigator (
   {
-    Mapa: {
-      screen: Mapa,
+    Login: {
+      screen: Login,
     },
     Home: {
       screen: Home,
     },
+    Mapa: {
+      screen: Mapa,
+    },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
   }
 );
+
+const Menu = DrawerNavigator(
+    {
+        Login: { screen: Login },
+        Home: { screen: Home },
+        Mapa: { screen: Mapa },
+    },
+    {
+        initialRouteName: 'Login',
+    }
+);
+
+const MenuButton = StackNavigator({
+  DrawerStack: { screen: Menu }
+}, {
+  headerMode: 'float',
+  navigationOptions: ({navigation}) => ({
+    title: 'SmartIF',
+    headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+  })
+})
 
 
 class App extends Component {
@@ -32,7 +57,7 @@ class App extends Component {
     }
     
     render() {
-        return <RootStack />;
+        return <MenuButton />;
     }
    
 }
