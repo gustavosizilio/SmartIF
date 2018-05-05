@@ -69,7 +69,7 @@ class AppMapa extends Component {
         var l = this.state.region.latitude;
         var loa = this.state.longitudeAl;
         var lo = this.state.region.longitude;
-        if (((la > l - 0.004) && (la < l + 0.004)) && ((loa > lo - 0.004) && (loa < lo + 0.004))) {
+        if ((la > l - 0.004) && (la < l + 0.004) && (loa > lo - 0.004) && (loa < lo + 0.004)) {
             this.setState({infoPosicaoAl: 'Você está no IFRN de Currais Novos'});
         } else {
             this.setState({infoPosicaoAl: 'Você não está no IFRN de Currais Novos'});
