@@ -13,7 +13,7 @@ import { StyleSheet,
   Button,
   Alert
   } from 'react-native';
-import { TabNavigator  } from 'react-navigation';
+import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 import MapView, { MAP_TYPES, Polygon, ProviderPropType } from 'react-native-maps';
 //import MyLocationMapMarker from './mapa/MyLocationMapMarker';
 
@@ -80,11 +80,9 @@ class AppMapa extends Component {
                 Alert.alert('Você está no IFRN de Currais Novos');
             } else {
                 Alert.alert('Você não está no IFRN de Currais Novos');
-                Alert.alert(loa + '<' + lo + ' - 0.004' + ' ou ' + loa + '>' + lo + ' + 0.004');
             }
         } else {
             Alert.alert('Você não está no IFRN de Currais Novos');
-            Alert.alert(la + '<' + l + ' - 0.004' + ' ou ' + la + '>' + l + ' + 0.004');
         }
     }
     
