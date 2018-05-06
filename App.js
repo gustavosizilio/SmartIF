@@ -11,43 +11,27 @@ import Mapa from './mapa/AppMapa';
 import Home from './login/AppHome';
 import Login from './login/AppLogin';
 
-const Tab = TabNavigator (
-  {
-    Login: {
-      screen: Login,
-    },
-    Home: {
-      screen: Home,
-    },
-    Mapa: {
-      screen: Mapa,
-    },
-  },
-  {
-    initialRouteName: 'Login',
-  }
-);
+
 
 const Menu = DrawerNavigator(
     {
         Login: { screen: Login },
         Home: { screen: Home },
         Mapa: { screen: Mapa },
-    },
-    {
-        initialRouteName: 'Login',
     }
 );
 
 const MenuButton = StackNavigator({
   DrawerStack: { screen: Menu }
-}, {
-  headerMode: 'float',
-  navigationOptions: ({navigation}) => ({
-    title: 'SmartIF',
-    headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
-  })
-})
+}, 
+    {
+        headerMode: 'float',
+        navigationOptions: ({navigation}) => ({
+          title: 'SmartIF',
+          headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+        })
+    }
+);
 
 
 class App extends Component {
