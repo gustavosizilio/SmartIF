@@ -49,22 +49,27 @@ class AppMapa extends Component {
             amount: 0,
             enableHack: false,
           };
+        this.conferirirPosicaoAluno;
     }
     
     componentDidMount() {
         this.watchId = navigator.geolocation.watchPosition(
                 (position) => {
-            this.setState({
-                latitudeAl: position.coords.latitude,
-                longitudeAl: position.coords.longitude,
-                latitudeAlc: position.coords.latitude, 
-                longitudeAlc: position.coords.longitude,
-                error: null,
-            });
-        },
+                    this.setState({
+                        latitudeAl: position.coords.latitude,
+                        longitudeAl: position.coords.longitude,
+                        latitudeAlc: position.coords.latitude, 
+                        longitudeAlc: position.coords.longitude,
+                        error: null,
+                    });
+                },
                 (error) => this.setState({error: error.message, latitudeAlc: LATITUDE, longitudeAlc: LONGITUDE}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
-                );
+        );
+
+    }
+    
+    conferirirPosicaoAluno() {
         var la = this.state.latitudeAl;
         var l = this.state.region.latitude;
         var loa = this.state.longitudeAl;
