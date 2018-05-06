@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Marker } from 'react-native-maps';
 import isEqual from 'lodash/isEqual';
+import { TabNavigator, DrawerNavigator } from 'react-navigation';
 
 const GEOLOCATION_OPTIONS = { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 };
 const ANCHOR = { x: 0.5, y: 0.5 };
