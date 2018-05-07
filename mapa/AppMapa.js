@@ -30,10 +30,14 @@ class AppMapa extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            infoPosicaoAl: null,
+            infoPosicaoAl: 'null',
             latitudeAl: null,
             longitudeAl: null,
+            latitudeAlc: LATITUDE,
+            longitudeAlc: LONGITUDE,
             erro: null,
+            amount: 0,
+            enableHack: false,
             region: {
               latitude: LATITUDE,
               longitude: LONGITUDE,
@@ -44,10 +48,6 @@ class AppMapa extends Component {
               latitude: LATITUDE,
               longitude: LONGITUDE,
             },
-            latitudeAlc: LATITUDE,
-            longitudeAlc: LONGITUDE,
-            amount: 0,
-            enableHack: false,
           };
         this.conferirirPosicaoAluno;
     }
@@ -66,7 +66,7 @@ class AppMapa extends Component {
                 (error) => this.setState({error: error.message, latitudeAlc: LATITUDE, longitudeAlc: LONGITUDE}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
         );
-
+        this.conferirirPosicaoAluno;
     }
     
     conferirirPosicaoAluno() {
@@ -76,13 +76,16 @@ class AppMapa extends Component {
         var lo = this.state.region.longitude;
         if ((la > l - 0.004) && (la < l + 0.004) && (loa > lo - 0.004) && (loa < lo + 0.004)) {
             this.setState({infoPosicaoAl: 'Você está no IFRN de Currais Novos'});
-        } else {
+        } else if ((la < l - 0.004) || (la > l + 0.004) || (loa < lo - 0.004) || (loa > lo + 0.004)) {
             this.setState({infoPosicaoAl: 'Você não está no IFRN de Currais Novos'});
+        } else {
+            this.setState({infoPosicaoAl: 'A formula está com erro.'});
         }
     }
 
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchId);
+        this.conferirirPosicaoAluno;
     }
     
     onRegionChange(region) {
