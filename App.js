@@ -11,28 +11,13 @@ import Mapa from './mapa/AppMapa';
 import Home from './login/AppHome';
 import Login from './login/AppLogin';
 
-
-
-const Menu = DrawerNavigator(
+const MenuLogin = StackNavigator(
     {
         Login: { screen: Login },
         Home: { screen: Home },
-        Mapa: { screen: Mapa },
+        Mapa: { screen: Mapa }
     }
 );
-
-const MenuButton = StackNavigator({
-  DrawerStack: { screen: Menu }
-}, 
-    {
-        headerMode: 'float',
-        navigationOptions: ({navigation}) => ({
-          title: 'SmartIF',
-          headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
-        })
-    }
-);
-
 
 class App extends Component {
         
@@ -41,7 +26,7 @@ class App extends Component {
     }
     
     render() {
-        return <MenuButton />;
+        return <MenuLogin />;
     }
    
 }
