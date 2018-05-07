@@ -11,28 +11,35 @@ import Mapa from './mapa/AppMapa';
 import Home from './login/AppHome';
 import Login from './login/AppLogin';
 
-
+const Padrao = StackNavigator(
+        {
+            Login: { screen: Login },
+            Home: { screen: Home }
+        }
+);
 
 const Menu = DrawerNavigator(
     {
         Login: { screen: Login },
         Home: { screen: Home },
-        Mapa: { screen: Mapa },
+        Mapa: { screen: Mapa }
+    }, {
+        initialRouteName: 'Login',
     }
 );
 
-const MenuButton = StackNavigator({
-  DrawerStack: { screen: Menu }
-}, 
+const MenuLogin = StackNavigator(
+    {
+        DrawerStack: { screen: Menu }
+    }, 
     {
         headerMode: 'float',
         navigationOptions: ({navigation}) => ({
-          title: 'SmartIF',
-          headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
+            title: 'SmartIF',
+            headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}> menu </Text>
         })
     }
 );
-
 
 class App extends Component {
         
@@ -41,7 +48,7 @@ class App extends Component {
     }
     
     render() {
-        return <MenuButton />;
+        return <MenuLogin />;
     }
    
 }
