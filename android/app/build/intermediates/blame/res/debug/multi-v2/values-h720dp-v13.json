@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/gustavo/SmartIF/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "/home/gustavo/Workspace/IFRN/SmartIF/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
                     "source": "/home/gustavo/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.0-alpha1.aar/e48d70f9e5203fe9ba48a2922696ae28/res/values-h720dp-v13/values-h720dp-v13.xml",

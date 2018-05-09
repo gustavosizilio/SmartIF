@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/gustavo/SmartIF/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ml/values-ml.xml",
+            "outputFile": "/home/gustavo/Workspace/IFRN/SmartIF/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ml/values-ml.xml",
             "map": [
                 {
                     "source": "/home/gustavo/.gradle/caches/transforms-1/files-1.1/play-services-base-10.2.4.aar/b585c877b89e245a3a9cf30a7b2680f4/res/values-ml/values.xml",
