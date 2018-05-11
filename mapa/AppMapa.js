@@ -20,8 +20,8 @@ import MapView, { MAP_TYPES, Polygon, ProviderPropType } from 'react-native-maps
 const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
-const LATITUDE = -6.261601;
-const LONGITUDE = -36.512239;
+const LATITUDE = -6.252939;
+const LONGITUDE = -36.534274;
 const LATITUDE_DELTA = 0.0050;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -49,17 +49,18 @@ class AppMapa extends Component {
             amount: 0,
             enableHack: false,
           };
-        this.conferirirPosicaoAluno;
     }
     
     componentDidMount() {
         this.watchId = navigator.geolocation.watchPosition(
                 (position) => {
+                    let estaNoIFRN = this.conferirirPosicaoAluno(position.coords.latitude, position.coords.longitude);
                     this.setState({
                         latitudeAl: position.coords.latitude,
                         longitudeAl: position.coords.longitude,
                         latitudeAlc: position.coords.latitude, 
                         longitudeAlc: position.coords.longitude,
+                        infoPosicaoAl: (estaNoIFRN) ? 'Você está no IFRN de Currais Novos' : 'Você não está no IFRN de Currais Novos',
                         error: null,
                     });
                 },
@@ -69,15 +70,19 @@ class AppMapa extends Component {
 
     }
     
-    conferirirPosicaoAluno() {
-        var la = this.state.latitudeAl;
+    conferirirPosicaoAluno(latitudeAl, longitudeAl) {
+      var la = latitudeAl;
+        alert(la);
         var l = this.state.region.latitude;
-        var loa = this.state.longitudeAl;
+        var loa = longitudeAl;
+        alert(loa);
         var lo = this.state.region.longitude;
         if ((la > l - 0.004) && (la < l + 0.004) && (loa > lo - 0.004) && (loa < lo + 0.004)) {
-            this.setState({infoPosicaoAl: 'Você está no IFRN de Currais Novos'});
+          return true;
+          //  this.setState({infoPosicaoAl: 'Você está no IFRN de Currais Novos'});
         } else {
-            this.setState({infoPosicaoAl: 'Você não está no IFRN de Currais Novos'});
+          return false;
+          //  this.setState({infoPosicaoAl: 'Você não está no IFRN de Currais Novos'});
         }
     }
 
@@ -105,7 +110,7 @@ class AppMapa extends Component {
                     Longitude(Aluno):{this.state.longitudeAl}
                     </Text>
                     <Text>
-                    {this.state.infoPosicaoAl}
+                    TESTE: {this.state.infoPosicaoAl}
                     </Text>
                     {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
                     <MapView
