@@ -5,40 +5,16 @@
  */
 
 import React, { Component } from 'react';
-import { Button, Text } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput, Button, TouchableOpacity, AsyncStorage, Alert, Dimensions } from 'react-native';
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
-import Mapa from './mapa/AppMapa';
-import Home from './login/AppHome';
 import Login from './login/AppLogin';
+import App2 from './App2';
 
-const Padrao = StackNavigator(
+const Menu = StackNavigator (
         {
             Login: { screen: Login },
-            Home: { screen: Home }
+            App2: { screen: App2 },
         }
-);
-
-const Menu = DrawerNavigator(
-    {
-        Login: { screen: Login },
-        Home: { screen: Home },
-        Mapa: { screen: Mapa }
-    }, {
-        initialRouteName: 'Login',
-    }
-);
-
-const MenuLogin = StackNavigator(
-    {
-        DrawerStack: { screen: Menu }
-    }, 
-    {
-        headerMode: 'float',
-        navigationOptions: ({navigation}) => ({
-            title: 'SmartIF',
-            headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}> menu </Text>
-        })
-    }
 );
 
 class App extends Component {
@@ -48,7 +24,7 @@ class App extends Component {
     }
     
     render() {
-        return <MenuLogin />;
+        return <Menu />;
     }
    
 }
