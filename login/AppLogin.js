@@ -1,18 +1,56 @@
-import React from 'react';
-import { Component, StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, AsyncStorage, Alert} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ImageBackground, TextInput, Button, TouchableOpacity, AsyncStorage, Alert, Dimensions } from 'react-native';
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 
 const ACCESS_TOKEN = 'access_token';
 
-
-export default class Login extends React.Component {
+export default class Login extends Component {
 
     constructor(props) {
-
         super(props);
+        try {
+            AsyncStorage.removeItem(ACCESS_TOKEN);
+        } catch(error) {    
+        }
         this.state = {username: "", password: "", error: ""};
-
     }
+    
+    login = () => {
+        try {
+            fetch('https://suap.ifrn.edu.br/api/v2/autenticacao/token/', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: this.state.username,
+                            password: this.state.password
+                        })
+                    })
+                        .then((response) => response.json())
+                        .then((response) => {
+                            if (response.token) {
+                                var token = response.token;
+                                this.setState({error: ""});
+                                this.storeToken(token);
+                                this.props.navigation.navigate('App2');
+                            } else {
+                                alert("Não foi possível autenticar!");
+                            }
+            });
+        } catch (error) {
+        }
+    }
+    
+    storeToken(responseData) {
+                AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+                }).catch((err) => {
+                });
+            }
 
     render() {
         return (
@@ -31,68 +69,20 @@ export default class Login extends React.Component {
                                        value={this.state.password}
                                        style={styles.input}>
                             </TextInput>
+                            <Button
+                            onPress={this.login.bind(this)}
+                            title="LOGIN"
+                            style={styles.buttonContainer}
+                          />
                         </View>
-                        <TouchableOpacity onPress={this.login.bind(this)} style={styles.buttonContainer}>
-                            <Text style={styles.buttonText}> LOGIN </Text>
-                        </TouchableOpacity>
+                        
                     </View>
                 </View>
                         );
             }
-
-            storeToken(responseData) {
-
-                AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err) => {
-                    if (err) {
-                        console.log("Erros Existentes");
-                        throw err;
-                    }
-                    console.log("Logou com successo!!!!!");
-
-                }).catch((err) => {
-                    console.log("O error é: " + err);
-                });
-            }
-
-            login = () => {
-                try {
-                    fetch('https://suap.ifrn.edu.br/api/v2/autenticacao/token/', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: this.state.username,
-                            password: this.state.password
-                        })
-                    })
-                            .then((response) => response.json())
-                            .then((response) => {
-                                //let res = await response.Text();
-                                if (response.token) {
-                                    //sucesso
-                                    var token = response.token;
-                                    console.log(token);
-                                    this.setState({error: ""});
-                                    // Em caso de sucesso, vamos armazenar o access_token no AsyncStorage
-                                    // alert("token " + token);
-                                    this.storeToken(token);
-                                    //ERA PRA REDIRECIONAR PARA PASTA HOME - VER COM GUSTAVO
-                                    this.props.navigation.navigate('Home');
-
-                                } else {
-                                    //caso de erro
-                                    alert("Não foi possível autenticar!");
-                                }
-                            });
-
-                } catch (error) {
-                    this.setState({error: error});
-                    console.log("error " + error);
-                }
-            }
+            
         }
+        
         const styles = StyleSheet.create({
             container: {
                 flex: 1,
