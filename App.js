@@ -5,28 +5,57 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground, TextInput, Button, TouchableOpacity, AsyncStorage, Alert, Dimensions } from 'react-native';
-import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import {
+  createStackNavigator,
+  createDrawerNavigator,
+  createSwitchNavigator,
+  DrawerActions,
+} from 'react-navigation';
 import Login from './login/AppLogin';
-import App2 from './App2';
+import Home from './login/AppHome';
+import Mapa from './mapa/AppMapa';
 
-const Menu = StackNavigator (
-        {
-            Login: { screen: Login },
-            App2: { screen: App2 },
-        }
+const TelasDrawer = createDrawerNavigator(
+    {
+        Home: { screen: Home },
+        Mapa: { screen: Mapa },
+    }
 );
 
-class App extends Component {
-        
-    constructor(props) {
-        super(props);
+const TelasStack = createStackNavigator(
+    {
+        DrawerStack: { screen: TelasDrawer },
+    }, 
+    {
+        headerMode: 'float',
+        navigationOptions: ({navigation}) => ({
+            title: 'SmartIF',
+            headerLeft: <Text onPress={() => { 
+                navigation.dispatch(DrawerActions.toggleDrawer())
+            }}>Menu</Text>
+        })
     }
-    
-    render() {
-        return <Menu />;
+);
+
+const TelasAuth = createSwitchNavigator(
+    {
+      Auth: Login,
+      App: TelasStack,
     }
-   
+);
+
+export default class App extends Component {
+  render() {
+    return (
+      <TelasAuth />
+    );
+  }
+  
 }
 
-export default App;
