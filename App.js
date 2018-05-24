@@ -12,41 +12,20 @@ import {
   View
 } from 'react-native';
 import {
-  createStackNavigator,
-  createDrawerNavigator,
-  createSwitchNavigator,
+  StackNavigator,
+  DrawerNavigator,
+  SwitchNavigator,
   DrawerActions,
 } from 'react-navigation';
 import Login from './login/AppLogin';
 import Home from './login/AppHome';
 import Mapa from './mapa/AppMapa';
+import App2 from './App2';
 
-const TelasDrawer = createDrawerNavigator(
-    {
-        Home: { screen: Home },
-        Mapa: { screen: Mapa },
-    }
-);
-
-const TelasStack = createStackNavigator(
-    {
-        DrawerStack: { screen: TelasDrawer },
-    }, 
-    {
-        headerMode: 'float',
-        navigationOptions: ({navigation}) => ({
-            title: 'SmartIF',
-            headerLeft: <Text onPress={() => { 
-                navigation.dispatch(DrawerActions.toggleDrawer())
-            }}>Menu</Text>
-        })
-    }
-);
-
-const TelasAuth = createSwitchNavigator(
+const TelasAuth = SwitchNavigator(
     {
       Auth: Login,
-      App: TelasStack,
+      App2: App2,
     }
 );
 

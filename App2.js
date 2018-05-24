@@ -10,6 +10,7 @@ import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation'
 import Mapa from './mapa/AppMapa';
 import Home from './login/AppHome';
 import Logout from './login/AppLogout';
+import Login from './login/AppLogin';
 import App from './App';
 
 const MenuDrawer = DrawerNavigator(
