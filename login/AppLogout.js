@@ -19,7 +19,7 @@ class Logout extends Component {
             AsyncStorage.removeItem(ACCESS_TOKEN);
         } catch(error) {    
         }
-        props.navigation.navigate('App');
+        this.props.navigation.navigate('App');
     }
     
     render() {

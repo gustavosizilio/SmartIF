@@ -60,6 +60,7 @@ export default class Login extends Component {
                         <View style={styles.inputContainer}>
                             <TextInput underlineColorAndroid='transparent' style={styles.input} 
                                        onChangeText={(username) => this.setState({username})}
+                                       placeholder='login' 
                                        value={this.state.username}>
                             </TextInput>
                 
