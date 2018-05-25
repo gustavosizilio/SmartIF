@@ -63,7 +63,7 @@ render() {
 onLogout() {
     try {
         AsyncStorage.removeItem(ACCESS_TOKEN);
-        this.props.navigation.navigate('Login');
+        this.props.navigation.navigate('App');
     } catch(error) {    
     }
 }
