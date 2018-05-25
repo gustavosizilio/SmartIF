@@ -9,7 +9,7 @@ import { StyleSheet, Text, View, ImageBackground, TextInput, Button, TouchableOp
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 import Mapa from './mapa/AppMapa';
 import Home from './login/AppHome';
-import Logout from './login/AppLogout';
+import Logout from './login/AppLogin';
 import Login from './login/AppLogin';
 import App from './App';
 
