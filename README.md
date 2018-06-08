@@ -99,17 +99,28 @@ Para testar se está tudo ok, basta excecutar o projeto:
 Configuração do firebase:
 
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+
 <script>
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAGM5T0qaFF8bMtAO9kIODag70Iqz16Jlo",
-    authDomain: "smartif-96d6d.firebaseapp.com",
-    databaseURL: "https://smartif-96d6d.firebaseio.com",
-    projectId: "smartif-96d6d",
-    storageBucket: "smartif-96d6d.appspot.com",
-    messagingSenderId: "799686119779"
-  };
-  firebase.initializeApp(config);
+
+var config = {
+
+apiKey: "AIzaSyAGM5T0qaFF8bMtAO9kIODag70Iqz16Jlo",
+
+authDomain: "smartif-96d6d.firebaseapp.com",
+
+databaseURL: "https://smartif-96d6d.firebaseio.com",
+
+projectId: "smartif-96d6d",
+
+storageBucket: "smartif-96d6d.appspot.com",
+
+messagingSenderId: "799686119779"
+
+};
+
+firebase.initializeApp(config);
+
 </script>
 
 
