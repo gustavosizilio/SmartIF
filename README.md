@@ -96,4 +96,20 @@ Para testar se está tudo ok, basta excecutar o projeto:
 > PastaProjeto> react-native run-android
 
 
+Configuração do firebase:
+
+      import * as firebase from 'firebase';
+
+      const firebaseConfig = {
+          apiKey: "AIzaSyAvGfO-Khi3Z0oFNg_oGV8zUUsbbWvyk0w",
+          authDomain: "smartif-9de31.firebaseapp.com",
+          databaseURL: "https://smartif-9de31.firebaseio.com",
+          projectId: "smartif-9de31",
+          storageBucket: "",
+          messagingSenderId: "795735418581"
+        };
+      const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+
+
 
