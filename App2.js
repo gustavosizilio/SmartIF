@@ -24,7 +24,7 @@ const MenuDrawer = DrawerNavigator(
 const Menu = StackNavigator(
     {
         DrawerStack: { screen: MenuDrawer },
-    }, 
+    },
     {
         headerMode: 'float',
         navigationOptions: ({navigation}) => ({
@@ -35,15 +35,15 @@ const Menu = StackNavigator(
 );
 
 class App2 extends Component {
-        
+
     constructor(props) {
         super(props);
     }
-    
+
     render() {
         return <Menu />;
     }
-   
+
 }
 
 export default App2;

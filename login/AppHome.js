@@ -5,7 +5,7 @@ import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation'
 const ACCESS_TOKEN = 'access_token';
 
 export default class Home extends Component {
-  
+
 constructor(props){
     super(props);
     this.state = {
@@ -14,7 +14,7 @@ constructor(props){
     }
     this.getTurmas();
 }
-  
+
 getToken(){
     try {
         accessToken = AsyncStorage.getItem(ACCESS_TOKEN);
@@ -22,7 +22,7 @@ getToken(){
             } else {
                 this.setState({accessToken: accessToken})
             }
-    } catch(error) {  
+    } catch(error) {
     }
 }
 
@@ -50,7 +50,7 @@ getTurmas() {
     });
 }
 
-  
+
 render() {
     return(
         <View style={styles.container}>
@@ -64,10 +64,10 @@ onLogout() {
     try {
         AsyncStorage.removeItem(ACCESS_TOKEN);
         this.props.navigation.navigate('App');
-    } catch(error) {    
+    } catch(error) {
     }
 }
-  
+
 verifyToken(token) {
     var accessToken = token
     try {
@@ -79,7 +79,7 @@ verifyToken(token) {
             error = res;
             throw error;
         }
-    } catch(error) {    
+    } catch(error) {
     }
 }
 
@@ -114,4 +114,4 @@ const styles = StyleSheet.create({
     color: '#FFF',
     alignSelf: 'center'
   },
-});
+}); 

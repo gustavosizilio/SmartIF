@@ -10,11 +10,11 @@ export default class Login extends Component {
         super(props);
         try {
             AsyncStorage.removeItem(ACCESS_TOKEN);
-        } catch(error) {    
+        } catch(error) {
         }
         this.state = {username: "", password: "", error: ""};
     }
-    
+
     login = () => {
         try {
             fetch('https://suap.ifrn.edu.br/api/v2/autenticacao/token/', {
@@ -42,7 +42,7 @@ export default class Login extends Component {
         } catch (error) {
         }
     }
-    
+
     storeToken(responseData) {
                 AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err) => {
                     if (err) {
@@ -58,14 +58,14 @@ export default class Login extends Component {
                     <View style={styles.content}>
                         <Text style={styles.logo}> ACESSAR </Text>
                         <View style={styles.inputContainer}>
-                            <TextInput underlineColorAndroid='transparent' style={styles.input} 
+                            <TextInput underlineColorAndroid='transparent' style={styles.input}
                                        onChangeText={(username) => this.setState({username})}
-                                       placeholder='login' 
+                                       placeholder='login'
                                        value={this.state.username}>
                             </TextInput>
-                
-                            <TextInput secureTextEntry={true} underlineColorAndroid='transparent'  
-                                       placeholder='password' 
+
+                            <TextInput secureTextEntry={true} underlineColorAndroid='transparent'
+                                       placeholder='password'
                                        onChangeText={(password) => this.setState({password})}
                                        value={this.state.password}
                                        style={styles.input}>
@@ -76,14 +76,14 @@ export default class Login extends Component {
                             style={styles.buttonContainer}
                           />
                         </View>
-                        
+
                     </View>
                 </View>
                         );
             }
-            
+
         }
-        
+
         const styles = StyleSheet.create({
             container: {
                 flex: 1,

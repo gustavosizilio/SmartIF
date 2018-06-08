@@ -27,10 +27,10 @@ const firebaseConfig = {
     storageBucket: "",
     messagingSenderId: "795735418581"
   };
-  const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 class AppMapa extends Component {
-        
+
     constructor(props) {
         super(props);
         this.state = {
@@ -60,7 +60,7 @@ class AppMapa extends Component {
             posicao: posicao,
           });
       }
-    
+
     componentDidMount() {
         this.watchId = navigator.geolocation.watchPosition(
                 (position) => {
@@ -85,7 +85,7 @@ class AppMapa extends Component {
         );
 
     }
-    
+
     conferirirPosicaoAluno(latitudeAl, longitudeAl) {
         var la = latitudeAl;
         var l = this.state.coordinate.latitude;
@@ -101,11 +101,11 @@ class AppMapa extends Component {
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchId);
     }
-    
+
     onRegionChange(region) {
       this.setState({ region });
     }
-    
+
     render() {
         return (
                 <View>
@@ -114,12 +114,12 @@ class AppMapa extends Component {
                       style={styles.map}
                       region={this.state.region}
                     >
-                        <MapView.Marker 
+                        <MapView.Marker
                             coordinate={{latitude: this.state.latitudeAl, longitude: this.state.longitudeAl}}
                             title={'Aluno'}
                             description={this.state.infoPosicaoAl}
                         />
-                        <MapView.Marker 
+                        <MapView.Marker
                             coordinate={this.state.coordinate}
                             title={'IFRN'}
                             image={require('./ifrnicon.png')}
@@ -128,7 +128,7 @@ class AppMapa extends Component {
                 </View>
 	);
     }
-   
+
 }
 
 const styles = StyleSheet.create({
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 
-  
+
   });
 
 export default AppMapa;

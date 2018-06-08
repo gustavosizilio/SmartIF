@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "639525540514",
+    "firebase_url": "https://smartif-d8731.firebaseio.com",
+    "project_id": "smartif-d8731",
+    "storage_bucket": "smartif-d8731.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639525540514:android:bc889c320c007fa2",
+        "android_client_info": {
+          "package_name": "com.smartif"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639525540514-a07hk0h4fdb0lctoune5gc3iep0sr8rl.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "639525540514-a07hk0h4fdb0lctoune5gc3iep0sr8rl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3gIwUe3uOG7SzKmQSe63KTdq8PLMJLSk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
