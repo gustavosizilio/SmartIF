@@ -9,7 +9,6 @@ import { StyleSheet, Text, View, ImageBackground, TextInput, Button, TouchableOp
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 import MapView, { MAP_TYPES, Polygon, ProviderPropType } from 'react-native-maps';
 //import MyLocationMapMarker from './mapa/MyLocationMapMarker';
-import * as firebase from 'firebase';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,21 +18,12 @@ const LONGITUDE = -36.534274;
 const LATITUDE_DELTA = 0.0050;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAvGfO-Khi3Z0oFNg_oGV8zUUsbbWvyk0w",
-    authDomain: "smartif-9de31.firebaseapp.com",
-    databaseURL: "https://smartif-9de31.firebaseio.com",
-    projectId: "smartif-9de31",
-    storageBucket: "",
-    messagingSenderId: "795735418581"
-  };
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
 class AppMapa extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            valor: null,
             figura: './ifrnicon.png',
             infoPosicaoAl: null,
             latitudeAl: 0.0,
@@ -54,14 +44,42 @@ class AppMapa extends Component {
           };
     }
 
-    writeNewProfessor(matricula, posicao) {
-        firebaseApp.database().ref('professor').set({
-            matricula: matricula,
-            posicao: posicao,
-          });
-      }
+  consultarPosicao() {
+        fetch("https://smartif-e3e52.firebaseio.com/professor.json",
+        {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            this.setState({
+                valor: JSON.stringify(responseJson),
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
 
-    componentDidMount() {
+  enviarPosicao(matricula, posicao) {
+        console.log("ENTROU AQUI");
+        fetch("https://smartif-e3e52.firebaseio.com/professor/"+matricula,
+        {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+		        posicao: posicao
+            }),
+        });
+    }
+
+  componentDidMount() {
         this.watchId = navigator.geolocation.watchPosition(
                 (position) => {
                     let estaNoIFRN = this.conferirirPosicaoAluno(position.coords.latitude, position.coords.longitude);
@@ -78,7 +96,8 @@ class AppMapa extends Component {
                         infoPosicaoAl: (estaNoIFRN) ? 'Você está no IFRN de Currais Novos' : 'Você não está no IFRN de Currais Novos',
                         error: null,
                     });
-                    this.writeNewProfessor('12345', position);
+                    this.enviarPosicao("54321", position);
+                    this.consultarPosicao();
                 },
                 (error) => this.setState({error: error.message, latitudeAl: 0.0, longitudeAl: 0.0}),
                 {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
@@ -109,6 +128,9 @@ class AppMapa extends Component {
     render() {
         return (
                 <View>
+                    <Text>
+                        Posicao Firebase: {this.state.valor}
+                    </Text>
                     <MapView
                       provider={this.props.provider}
                       style={styles.map}
