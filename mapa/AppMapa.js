@@ -1,14 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Button, TouchableOpacity, AsyncStorage, Alert, Dimensions } from 'react-native';
-import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
+import {
+  StackNavigator,
+  DrawerNavigator,
+  SwitchNavigator,
+  DrawerActions,
+} from 'react-navigation';
 import MapView, { MAP_TYPES, Polygon, ProviderPropType } from 'react-native-maps';
-//import MyLocationMapMarker from './mapa/MyLocationMapMarker';
 
 const { width, height } = Dimensions.get('window');
 
@@ -18,34 +22,44 @@ const LONGITUDE = -36.534274;
 const LATITUDE_DELTA = 0.0050;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+const USERNAME = 'username';
+
 class AppMapa extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            valor: null,
-            figura: './ifrnicon.png',
-            infoPosicaoAl: null,
-            latitudeAl: 0.0,
-            longitudeAl: 0.0,
-            erro: null,
-            amount: 0,
-            enableHack: false,
-            region: {
-              latitude: LATITUDE,
-              longitude: LONGITUDE,
-              latitudeDelta: LATITUDE_DELTA,
-              longitudeDelta: LONGITUDE_DELTA,
-            },
-            coordinate: {
-              latitude: LATITUDE,
-              longitude: LONGITUDE,
-            },
-          };
+        try {
+            this.state = {
+                matricula: "AsyncStorage.getItem(USERNAME, (error) => {})",
+                professoresString: "",
+                professoresJson: {},
+                professorString: "",
+                professorJson: {},
+                figura: './ifrnicon.png',
+                infoPosicaoAl: null,
+                latitudeAl: 0.0,
+                longitudeAl: 0.0,
+                erro: null,
+                amount: 0,
+                enableHack: false,
+                region: {
+                  latitude: LATITUDE,
+                  longitude: LONGITUDE,
+                  latitudeDelta: LATITUDE_DELTA,
+                  longitudeDelta: LONGITUDE_DELTA,
+                },
+                coordinate: {
+                  latitude: LATITUDE,
+                  longitude: LONGITUDE,
+                },
+              };
+      } catch (error) {
+          
+      }
     }
 
   consultarPosicao() {
-        fetch("https://smartif-e3e52.firebaseio.com/professor.json",
+        fetch("https://smartif-96d6d.firebaseio.com/professor.json",
         {
             method: 'GET',
             headers: {
@@ -56,7 +70,29 @@ class AppMapa extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             this.setState({
-                valor: JSON.stringify(responseJson),
+                professoresString: JSON.stringify(responseJson),
+                professoresJson: JSON.parse(JSON.stringify(responseJson)),
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+    
+    consultarPosicaoMatricula(matricula) {
+        fetch("https://smartif-96d6d.firebaseio.com/professor/" + matricula + ".json",
+        {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            this.setState({
+                professorString: JSON.stringify(responseJson),
+                professorJson: JSON.parse(JSON.stringify(responseJson)),
             });
         })
         .catch((error) => {
@@ -64,47 +100,18 @@ class AppMapa extends Component {
         });
     }
 
-  enviarPosicao(matricula, posicao) {
-        console.log("ENTROU AQUI");
-        fetch("https://smartif-e3e52.firebaseio.com/professor/"+matricula,
+  enviarPosicao(matricula, latitude, longitude) {
+        fetch("https://smartif-96d6d.firebaseio.com/professor/"+matricula+".json",
         {
-            method: 'POST',
+            method: 'PUT',
             headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-		        posicao: posicao
-            }),
+            body: JSON.stringify({latitude: latitude, longitude: longitude})
         });
     }
-
-  componentDidMount() {
-        this.watchId = navigator.geolocation.watchPosition(
-                (position) => {
-                    let estaNoIFRN = this.conferirirPosicaoAluno(position.coords.latitude, position.coords.longitude);
-                    this.setState({
-                        figura: './ifrnicon2.png',
-                        region: {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                            latitudeDelta: LATITUDE_DELTA,
-                            longitudeDelta: LONGITUDE_DELTA,
-                        },
-                        latitudeAl: position.coords.latitude,
-                        longitudeAl: position.coords.longitude,
-                        infoPosicaoAl: (estaNoIFRN) ? 'Você está no IFRN de Currais Novos' : 'Você não está no IFRN de Currais Novos',
-                        error: null,
-                    });
-                    this.enviarPosicao("54321", position);
-                    this.consultarPosicao();
-                },
-                (error) => this.setState({error: error.message, latitudeAl: 0.0, longitudeAl: 0.0}),
-                {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
-        );
-
-    }
-
+    
     conferirirPosicaoAluno(latitudeAl, longitudeAl) {
         var la = latitudeAl;
         var l = this.state.coordinate.latitude;
@@ -117,6 +124,36 @@ class AppMapa extends Component {
         }
     }
 
+  componentDidMount() {
+        this.watchId = navigator.geolocation.watchPosition(
+                (position) => {
+                    let estaNoIFRN = this.conferirirPosicaoAluno(position.coords.latitude, position.coords.longitude);
+                    this.setState({
+                        marca: this.gerarMarker(),
+                        figura: './ifrnicon2.png',
+                        region: {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            latitudeDelta: LATITUDE_DELTA,
+                            longitudeDelta: LONGITUDE_DELTA,
+                        },
+                        latitudeAl: position.coords.latitude,
+                        longitudeAl: position.coords.longitude,
+                        infoPosicaoAl: (estaNoIFRN) ? 'Você está no IFRN de Currais Novos' : 'Você não está no IFRN de Currais Novos',
+                        error: null,
+                    });
+                    this.enviarPosicao("12345", this.state.latitudeAl+1.000, this.state.longitudeAl);
+                    this.enviarPosicao("54321", this.state.latitudeAl+2.000, this.state.longitudeAl);
+                    this.enviarPosicao("67890", this.state.latitudeAl+3.000, this.state.longitudeAl);
+                    this.enviarPosicao(AsyncStorage.getItem(USERNAME), this.state.latitudeAl, this.state.longitudeAl);
+                    this.consultarPosicao();
+                    this.consultarPosicaoMatricula("12345");
+                },
+                (error) => this.setState({error: error.message, latitudeAl: 0.0, longitudeAl: 0.0}),
+                {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
+        );
+    }
+
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchId);
     }
@@ -124,18 +161,34 @@ class AppMapa extends Component {
     onRegionChange(region) {
       this.setState({ region });
     }
-
+    
+    gerarPontos(x, y) {
+        return (<MapView.Marker coordinate={{latitude: x, longitude: y}} />);
+    }
+    
+    gerarMarker() {
+        professores = this.state.professoresJson;
+        i = 0;
+        for (i = 0; i < professores.length; i++) {
+            this.gerarPontos(professores[i].latitude, professores[i].longitude);
+        }
+        return i;
+    }
+    
     render() {
         return (
                 <View>
                     <Text>
-                        Posicao Firebase: {this.state.valor}
+                        Firebase (Conexões): {this.state.professoresString}
                     </Text>
                     <MapView
                       provider={this.props.provider}
                       style={styles.map}
                       region={this.state.region}
                     >
+                        {this.gerarPontos(0.0, 0.0)}
+                        {this.gerarPontos(3.0, 1.0)}
+                        {this.gerarPontos(4.5, 1.5)}
                         <MapView.Marker
                             coordinate={{latitude: this.state.latitudeAl, longitude: this.state.longitudeAl}}
                             title={'Aluno'}
@@ -175,3 +228,5 @@ const styles = StyleSheet.create({
   });
 
 export default AppMapa;
+
+
