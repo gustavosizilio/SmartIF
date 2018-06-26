@@ -167,9 +167,9 @@ class AppMapa extends Component {
     }
     
     gerarMarker() {
-	professoresIds = Object.keys();
+	professoresIds = Object.keys(this.state.professoresJson);
 	for (i = 0; i < professoresIds.length; i++) {
-	    this.gerarPontos(this.state.professoresJson[professores[i]]);
+	    this.gerarPontos(this.state.professoresJson[professoresIds[i]]);
 	}
     }
     
