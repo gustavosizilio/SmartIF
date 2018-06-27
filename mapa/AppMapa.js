@@ -79,6 +79,7 @@ class AppMapa extends Component {
         });
     }
     
+    
     consultarPosicaoMatricula(matricula) {
         fetch("https://smartif-96d6d.firebaseio.com/professor/" + matricula + ".json",
         {
@@ -108,7 +109,7 @@ class AppMapa extends Component {
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({latitude: latitude, longitude: longitude})
+            body: JSON.stringify({latitude: latitude, longitude: longitude, matricula: matricula})
         });
     }
     
@@ -121,6 +122,14 @@ class AppMapa extends Component {
           return true;
         } else {
           return false;
+        }
+    }
+    
+    conferirirPosicaoAlunoString(latitudeAl, longitudeAl) {
+        if (this.conferirirPosicaoAluno(latitudeAl, longitudeAl)) {
+          return "Está no IFRN de Currais Novos";
+        } else {
+          return "Não está no IFRN de Currais Novos";
         }
     }
 
@@ -143,10 +152,7 @@ class AppMapa extends Component {
                         error: null,
                     });
                     this.enviarPosicao("celular1", this.state.latitudeAl, this.state.longitudeAl);
-                    //this.enviarPosicao("celular2", this.state.latitudeAl+1.000, this.state.longitudeAl);
-                    //this.enviarPosicao("54321", this.state.latitudeAl+2.000, this.state.longitudeAl);
-                    //this.enviarPosicao("67890", this.state.latitudeAl+3.000, this.state.longitudeAl);
-                    //this.enviarPosicao(AsyncStorage.getItem(USERNAME), this.state.latitudeAl, this.state.longitudeAl);
+                    //this.enviarPosicao("celular2", this.state.latitudeAl+0.001, this.state.longitudeAl);
                     this.consultarPosicao();
                     this.consultarPosicaoMatricula("12345");
                 },
@@ -190,13 +196,10 @@ class AppMapa extends Component {
                         {Object.keys(this.state.professoresJson).map((key) => (
                                 <MapView.Marker 
                                     coordinate={{latitude: this.state.professoresJson[key].latitude, longitude: this.state.professoresJson[key].longitude}} 
+                                    title={JSON.stringify(key)} 
+                                    description={JSON.stringify(this.conferirirPosicaoAlunoString(this.state.professoresJson[key].latitude, this.state.professoresJson[key].longitude))}
                                 />
                         ))}
-                        <MapView.Marker
-                            coordinate={{latitude: this.state.latitudeAl, longitude: this.state.longitudeAl}}
-                            title={'Aluno'}
-                            description={this.state.infoPosicaoAl}
-                        />
                         <MapView.Marker
                             coordinate={this.state.coordinate}
                             title={'IFRN'}
