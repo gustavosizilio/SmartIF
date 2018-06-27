@@ -21,6 +21,7 @@ import Login from './login/AppLogin';
 import Home from './login/AppHome';
 import Mapa from './mapa/AppMapa';
 import App2 from './App2';
+import App3 from './App3';
 
 const TelasAuth = SwitchNavigator(
     {
