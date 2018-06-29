@@ -22,6 +22,7 @@ import App from './App';
 const MenuDrawer = DrawerNavigator(
     {
         Mapa: { screen: Mapa },
+        Usuários: { screen: Home },
         Configuração: { screen: Config },
         Logout: { screen: Logout},
     }
